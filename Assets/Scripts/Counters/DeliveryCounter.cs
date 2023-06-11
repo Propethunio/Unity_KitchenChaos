@@ -20,7 +20,7 @@ public class DeliveryCounter : CounterMaster {
 
     private void TryDeliverRecipe() {
         if(HasKitchenObject()) {
-            DeliveryManager.Instance.DeliverRecipe(currPlateKitchenObject);
+            DeliveryManager.Instance.DeliverRecipe(currPlateKitchenObject, this.transform);
             GetKitchenObject().DestrySelf();
         }
     }

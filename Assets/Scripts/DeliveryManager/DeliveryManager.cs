@@ -6,6 +6,12 @@ using UnityEngine;
 public class DeliveryManager : MonoBehaviour {
 
     public event EventHandler OnRecipeChanged;
+    public event EventHandler<OnRecipeDeliveryEventArgs> OnRecipeSuccess;
+    public event EventHandler<OnRecipeDeliveryEventArgs> OnRecipeFailed;
+
+    public class OnRecipeDeliveryEventArgs : EventArgs {
+        public Transform tranform;
+    }
 
     public static DeliveryManager Instance { get; private set; }
 
@@ -35,7 +41,7 @@ public class DeliveryManager : MonoBehaviour {
         }
     }
 
-    public void DeliverRecipe(PlateKitchenObject plateKitchenObject) { 
+    public void DeliverRecipe(PlateKitchenObject plateKitchenObject, Transform transform) { 
         foreach (RecipeSO waitingRecipeSO in waitingRecipeSOList) {
             if (waitingRecipeSO.kitchenObjectSOList.Count == plateKitchenObject.GetKitchenObjectSOList().Count) {
                 bool plateContentMatchesRecipe = true;
@@ -54,11 +60,16 @@ public class DeliveryManager : MonoBehaviour {
                 if (plateContentMatchesRecipe) {
                     waitingRecipeSOList.Remove(waitingRecipeSO);
                     OnRecipeChanged.Invoke(this, EventArgs.Empty);
+                    OnRecipeSuccess.Invoke(this, new OnRecipeDeliveryEventArgs {
+                        tranform = transform
+                    });
                     return;
                 }
             }
         }
-        print("Bad Ricepie!");
+        OnRecipeFailed.Invoke(this, new OnRecipeDeliveryEventArgs {
+            tranform = transform
+        });
     }
 
     public List<RecipeSO> GetWaitingRecipeSOList() {
