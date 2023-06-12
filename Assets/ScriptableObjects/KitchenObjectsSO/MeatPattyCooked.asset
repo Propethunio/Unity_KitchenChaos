@@ -15,3 +15,4 @@ MonoBehaviour:
   prefab: {fileID: 2416765976109835488, guid: 7b8ed03573a687247a4ca53509014c49, type: 3}
   sprite: {fileID: 21300000, guid: f1f50c7ef90b19741b26f2040806cf56, type: 3}
   objectName: Meat Patty Cooked
+  outputOfRecipeType: 2

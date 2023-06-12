@@ -13,12 +13,13 @@ public class Player : MonoBehaviour, IKitchenObjectParent {
         public CounterMaster selectedCounter;
     }
 
+    [HideInInspector] public bool isWalking;
     [SerializeField] private float moveSpeed = 7f;
     [SerializeField] private GameInput gameInput;
     [SerializeField] private LayerMask counterLayerMask;
     [SerializeField] private Transform kitchenObjectHoldPoint;
 
-    private bool isWalking;
+    public bool isAI;
     private Vector3 lastInteractDir;
     private CounterMaster selectedcounter;
     private KitchenObject kitchenObject;
@@ -30,6 +31,9 @@ public class Player : MonoBehaviour, IKitchenObjectParent {
     private void Start() {
         gameInput.OnInteractAction += GameInput_OnInteractAction;
         gameInput.OnInteractAlternateAction += GameInput_OnInteractAlternateAction;
+        if (isAI) {
+            this.enabled = false;
+        }
     }
 
     private void GameInput_OnInteractAlternateAction(object sender, EventArgs e) {
@@ -45,8 +49,8 @@ public class Player : MonoBehaviour, IKitchenObjectParent {
     }
 
     private void Update() {
-        HandleMovement();
-        HandleInteractions();
+            HandleMovement();
+            HandleInteractions();
     }
      
     public bool IsWalking() {

@@ -25,14 +25,14 @@ public class DeliveryManager : MonoBehaviour {
     private void Awake() {
         Instance = this;
         waitingRecipeSOList = new List<RecipeSO>();
-        spawnRecipeTimerMax = UnityEngine.Random.Range(5f,12f);
+        spawnRecipeTimerMax = 3f;
     }
 
     private void Update() {
         spawnRecipeTimer += Time.deltaTime;
         if (spawnRecipeTimer >= spawnRecipeTimerMax) {
             spawnRecipeTimer = 0f;
-            spawnRecipeTimerMax = UnityEngine.Random.Range(5f, 12f);
+            spawnRecipeTimerMax = UnityEngine.Random.Range(10f, 22f);
             if(waitingRecipeSOList.Count < waitingRecipesMax) {
                 RecipeSO newWaitingRecipeSO = recipeSOList[UnityEngine.Random.Range(0, recipeSOList.Count)];
                 waitingRecipeSOList.Add(newWaitingRecipeSO);
