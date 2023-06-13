@@ -13,7 +13,7 @@ public class KitchenObject : MonoBehaviour {
     }
 
     public void SetKitchenObjectParent(IKitchenObjectParent kitchenObjectParent) {
-        if (this.kitchenObjectParent != null) {
+        if(this.kitchenObjectParent != null) {
             this.kitchenObjectParent.ClearnKitchenObject();
         }
         this.kitchenObjectParent = kitchenObjectParent;
@@ -32,7 +32,7 @@ public class KitchenObject : MonoBehaviour {
     }
 
     public bool TryGetPlate(out PlateKitchenObject plateKitchenObject) {
-        if (this is PlateKitchenObject) {
+        if(this is PlateKitchenObject) {
             plateKitchenObject = this as PlateKitchenObject;
             return true;
         } else {

@@ -8,7 +8,7 @@ public class Player : MonoBehaviour, IKitchenObjectParent {
     public static Player Instance { get; private set; }
 
     public event EventHandler OnPickedSomething;
-    public event EventHandler <OnSelectedCounterChangedEventArgs> OnSelectedCounterChanged;
+    public event EventHandler<OnSelectedCounterChangedEventArgs> OnSelectedCounterChanged;
     public class OnSelectedCounterChangedEventArgs : EventArgs {
         public CounterMaster selectedCounter;
     }
@@ -33,14 +33,18 @@ public class Player : MonoBehaviour, IKitchenObjectParent {
     }
 
     private void GameInput_OnInteractAlternateAction(object sender, EventArgs e) {
-        if(selectedcounter != null) {
-            selectedcounter.InteractAlternate(this);
+        if(GameManager.Instance.IsGamePlaying()) {
+            if(selectedcounter != null) {
+                selectedcounter.InteractAlternate(this);
+            }
         }
     }
 
     private void GameInput_OnInteractAction(object sender, System.EventArgs e) {
-        if (selectedcounter != null) {
-            selectedcounter.Interact(this);
+        if(GameManager.Instance.IsGamePlaying()) {
+            if(selectedcounter != null) {
+                selectedcounter.Interact(this);
+            }
         }
     }
 
@@ -48,7 +52,7 @@ public class Player : MonoBehaviour, IKitchenObjectParent {
         HandleMovement();
         HandleInteractions();
     }
-     
+
     public bool IsWalking() {
         return isWalking;
     }
@@ -56,13 +60,13 @@ public class Player : MonoBehaviour, IKitchenObjectParent {
     private void HandleInteractions() {
         Vector2 inputVector = gameInput.GetMovementVectorNormalized();
         Vector3 moveDir = new Vector3(inputVector.x, 0f, inputVector.y);
-        if (moveDir != Vector3.zero) {
+        if(moveDir != Vector3.zero) {
             lastInteractDir = moveDir;
         }
         float interactDistance = 2f;
-        if (Physics.Raycast(transform.position, lastInteractDir, out RaycastHit raycastHit, interactDistance, counterLayerMask)) {
-            if (raycastHit.transform.TryGetComponent(out CounterMaster counterMaster)) {
-                if (counterMaster != selectedcounter) {
+        if(Physics.Raycast(transform.position, lastInteractDir, out RaycastHit raycastHit, interactDistance, counterLayerMask)) {
+            if(raycastHit.transform.TryGetComponent(out CounterMaster counterMaster)) {
+                if(counterMaster != selectedcounter) {
                     SetSelectedCounter(counterMaster);
                 }
             } else {
@@ -80,21 +84,20 @@ public class Player : MonoBehaviour, IKitchenObjectParent {
         float playerRadius = .7f;
         float playerHeight = 2f;
         bool canMove = !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, moveDir, moveDistance);
-        if (!canMove) {
+        if(!canMove) {
             Vector3 moveDirX = new Vector3(moveDir.x, 0, 0).normalized;
             canMove = moveDir.x != 0 && !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, moveDirX, moveDistance);
-            if (canMove) {
+            if(canMove) {
                 moveDir = moveDirX;
-            }
-            else {
+            } else {
                 Vector3 moveDirZ = new Vector3(0, 0, moveDir.z).normalized;
                 canMove = moveDir.z != 0 && !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, moveDirZ, moveDistance);
-                if (canMove) {
+                if(canMove) {
                     moveDir = moveDirZ;
                 }
             }
         }
-        if (canMove) {
+        if(canMove) {
             transform.position += moveDir * moveDistance;
         }
         isWalking = moveDir != Vector3.zero;

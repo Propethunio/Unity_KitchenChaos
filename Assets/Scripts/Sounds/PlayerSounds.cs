@@ -14,7 +14,7 @@ public class PlayerSounds : MonoBehaviour {
 
     private void Update() {
         footstepTimer += Time.deltaTime;
-        if (footstepTimer >= footstepTimerMax) {
+        if(footstepTimer >= footstepTimerMax) {
             footstepTimer = 0f;
             if(player.IsWalking()) {
                 float volume = 1f;

@@ -8,7 +8,7 @@ public class StoveCounterVisual : MonoBehaviour {
     [SerializeField] private GameObject particlesGameObject;
     [SerializeField] private GameObject stoveOnGameObject;
 
-    private void Start () {
+    private void Start() {
         stoveCounter.OnStateChanged += StoveCounter_OnStateChanged;
     }
 

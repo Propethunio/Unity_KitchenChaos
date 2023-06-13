@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class PlateCompleteVisual : MonoBehaviour {
 
-    [Serializable] public struct KitchenObjectSOGameObject {
+    [Serializable]
+    public struct KitchenObjectSOGameObject {
         public KitchenObjectSO kitchenObjectSO;
         public GameObject gameObject;
     }
@@ -13,7 +14,7 @@ public class PlateCompleteVisual : MonoBehaviour {
     [SerializeField] private PlateKitchenObject plateKitchenObject;
     [SerializeField] private List<KitchenObjectSOGameObject> kitchenObjectSOGameObjectList;
 
-    private void Start () {
+    private void Start() {
         plateKitchenObject.OnIngredientAdded += PlateKitchenObject_OnIngredientAdded;
     }
 

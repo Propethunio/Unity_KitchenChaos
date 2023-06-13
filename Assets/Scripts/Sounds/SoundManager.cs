@@ -12,7 +12,7 @@ public class SoundManager : MonoBehaviour {
         Instance = this;
     }
 
-    private void Start () {
+    private void Start() {
         DeliveryManager.Instance.OnRecipeSuccess += DeliveryManager_OnRecipeSuccess;
         DeliveryManager.Instance.OnRecipeFailed += DeliveryManager_OnRecipeFailed;
         CuttingCounter.OnAnyCut += CuttingCounter_OnAnyCut;
@@ -32,7 +32,7 @@ public class SoundManager : MonoBehaviour {
     }
 
     private void Player_OnPickedSomething(object sender, System.EventArgs e) {
-    PlaySoundFromArray(audioClipsRefsSO.objectPickup, Player.Instance.transform.position);
+        PlaySoundFromArray(audioClipsRefsSO.objectPickup, Player.Instance.transform.position);
     }
 
     private void CuttingCounter_OnAnyCut(object sender, System.EventArgs e) {

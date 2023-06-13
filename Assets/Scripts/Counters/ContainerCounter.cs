@@ -15,4 +15,4 @@ public class ContainerCounter : CounterMaster {
             OnPlayerGrabbedObject?.Invoke(this, EventArgs.Empty);
         }
     }
-} 
+}
