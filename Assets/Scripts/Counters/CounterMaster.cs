@@ -7,6 +7,10 @@ public class CounterMaster : MonoBehaviour, IKitchenObjectParent {
 
     public static EventHandler OnAnyObjectPlacedHere;
 
+    public static void ResetStaticData() {
+        OnAnyObjectPlacedHere = null;
+    }
+
     [SerializeField] private Transform counterTopPoint;
 
     private KitchenObject kitchenObject;

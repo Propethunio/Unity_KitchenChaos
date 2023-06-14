@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class MainMenuUI : MonoBehaviour {
+
+    private void Start() {
+        Time.timeScale = 1f;
+    }
 
     public void PlayClick() {
         Loader.Load(Loader.Scene.Game);
