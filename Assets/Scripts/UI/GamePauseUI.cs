@@ -1,8 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GamePauseUI : MonoBehaviour {
+
+    [SerializeField] private GameObject optionsUI;
 
     private bool isActive;
 
@@ -19,13 +22,15 @@ public class GamePauseUI : MonoBehaviour {
         }
     }
 
-    private void Show() {
+    public void Show() {
         isActive = true;
         gameObject.SetActive(true);
+        gameObject.GetComponentInChildren<Button>().Select();
     }
 
-    private void Hide() {
+    public void Hide() {
         isActive = false;
+        optionsUI.SetActive(false);
         gameObject.SetActive(false);
     }
 
