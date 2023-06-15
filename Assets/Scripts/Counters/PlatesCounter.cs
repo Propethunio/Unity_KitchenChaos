@@ -9,18 +9,22 @@ public class PlatesCounter : CounterMaster {
     public event EventHandler OnPlateRemoved;
 
     [SerializeField] private KitchenObjectSO plateKitchenObjectSO;
-    [SerializeField] private float spawnPlateTimerMax = 4f;
+    [SerializeField] private float spawnPlateTimer = 4f;
 
-    private int PlatesSpawnedAmount;
-    private int PlatesSpawnedAmountMax = 4;
-    private float spawnPlateTimer;
+    private int platesSpawnedAmount;
+    private int platesSpawnedAmountMax = 4;
+    private float timer;
+
+    private void Awake() {
+        timer = spawnPlateTimer;
+    }
 
     private void Update() {
-        spawnPlateTimer += Time.deltaTime;
-        if(spawnPlateTimer > spawnPlateTimerMax) {
-            spawnPlateTimer = 0f;
-            if(PlatesSpawnedAmount < PlatesSpawnedAmountMax) {
-                PlatesSpawnedAmount++;
+        timer -= Time.deltaTime;
+        if(timer < 0) {
+            timer = spawnPlateTimer;
+            if(GameManager.Instance.IsGamePlaying() && platesSpawnedAmount < platesSpawnedAmountMax) {
+                platesSpawnedAmount++;
                 OnPlateSpawned?.Invoke(this, EventArgs.Empty);
             }
         }
@@ -28,9 +32,9 @@ public class PlatesCounter : CounterMaster {
 
     public override void Interact(Player player) {
         if(!player.HasKitchenObject()) {
-            if(PlatesSpawnedAmount > 0) {
+            if(platesSpawnedAmount > 0) {
                 spawnPlateTimer = 0f;
-                PlatesSpawnedAmount--;
+                platesSpawnedAmount--;
                 KitchenObject.SpawnKitchenObject(plateKitchenObjectSO, player);
                 OnPlateRemoved?.Invoke(this, EventArgs.Empty);
             }

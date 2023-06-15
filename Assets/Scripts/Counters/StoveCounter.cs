@@ -145,4 +145,8 @@ public class StoveCounter : CounterMaster, IHasProgress {
         }
         return null;
     }
+
+    public bool isFried() {
+        return state == State.Fried;
+    }
 }

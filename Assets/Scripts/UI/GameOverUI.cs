@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameOverUI : MonoBehaviour {
 
@@ -17,6 +18,7 @@ public class GameOverUI : MonoBehaviour {
         if(GameManager.Instance.IsGameOver()) {
             recipeDeliveredText.text = DeliveryManager.Instance.GetSuccesfullRecipesAmount().ToString();
             Show();
+            SelectButton();
         } else {
             Hide();
         }
@@ -28,5 +30,17 @@ public class GameOverUI : MonoBehaviour {
 
     private void Hide() {
         gameObject.SetActive(false);
+    }
+
+    public void MainMenuClick() {
+        Loader.Load(Loader.Scene.MainMenu);
+    }
+
+    public void TryAgainClick() {
+        Loader.Load(Loader.Scene.Game);
+    }
+
+    private void SelectButton() {
+        gameObject.GetComponentInChildren<Button>().Select();
     }
 }

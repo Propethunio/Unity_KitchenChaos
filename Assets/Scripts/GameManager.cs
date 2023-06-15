@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour {
         GameOver
     }
     private State state;
-    private float waitingTimer = 1f;
+    private float waitingTimer = 3f;
 
     private void Awake() {
         Instance = this;
@@ -30,6 +30,14 @@ public class GameManager : MonoBehaviour {
 
     private void Start() {
         GameInput.Instance.OnPauseAction += GameInput_OnPauseAction;
+        GameInput.Instance.OnInteractAction += GameInput_OnInteractAction;
+    }
+
+    private void GameInput_OnInteractAction(object sender, EventArgs e) {
+        if(state == State.WaitingToStart) {
+            state = State.CountdownToStart;
+            OnStateChanged?.Invoke(this, new EventArgs());
+        }
     }
 
     private void GameInput_OnPauseAction(object sender, EventArgs e) {
@@ -39,12 +47,6 @@ public class GameManager : MonoBehaviour {
     private void Update() {
         switch(state) {
             case State.WaitingToStart:
-                waitingTimer -= Time.deltaTime;
-                if(waitingTimer <= 0f) {
-                    state = State.CountdownToStart;
-                    waitingTimer = 3f;
-                    OnStateChanged?.Invoke(this, EventArgs.Empty);
-                }
                 break;
             case State.CountdownToStart:
                 waitingTimer -= Time.deltaTime;
