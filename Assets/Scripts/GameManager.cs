@@ -31,6 +31,10 @@ public class GameManager : MonoBehaviour {
     private void Start() {
         GameInput.Instance.OnPauseAction += GameInput_OnPauseAction;
         GameInput.Instance.OnInteractAction += GameInput_OnInteractAction;
+        if(Player.Instance.isAI) {
+            state = State.CountdownToStart;
+            OnStateChanged?.Invoke(this, new EventArgs());
+        }
     }
 
     private void GameInput_OnInteractAction(object sender, EventArgs e) {
@@ -53,6 +57,7 @@ public class GameManager : MonoBehaviour {
                 if(waitingTimer <= 0f) {
                     state = State.GamePlaying;
                     waitingTimer = gameTime;
+                    DeliveryManager.Instance.StartGame();
                     OnStateChanged?.Invoke(this, EventArgs.Empty);
                 }
                 break;

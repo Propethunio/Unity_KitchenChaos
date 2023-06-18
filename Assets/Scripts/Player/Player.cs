@@ -31,7 +31,7 @@ public class Player : MonoBehaviour, IKitchenObjectParent {
     private void Start() {
         gameInput.OnInteractAction += GameInput_OnInteractAction;
         gameInput.OnInteractAlternateAction += GameInput_OnInteractAlternateAction;
-        if (isAI) {
+        if(isAI) {
             this.enabled = false;
         }
     }
@@ -53,8 +53,8 @@ public class Player : MonoBehaviour, IKitchenObjectParent {
     }
 
     private void Update() {
-            HandleMovement();
-            HandleInteractions();
+        HandleMovement();
+        HandleInteractions();
     }
 
     public bool IsWalking() {

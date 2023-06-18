@@ -26,7 +26,6 @@ public class DeliveryManager : MonoBehaviour {
     private void Awake() {
         Instance = this;
         waitingRecipeSOList = new List<RecipeSO>();
-        spawnRecipeTimerMax = 2f;
     }
 
     private void Update() {
@@ -80,5 +79,10 @@ public class DeliveryManager : MonoBehaviour {
 
     public int GetSuccesfullRecipesAmount() {
         return successfullRecipesAmount;
+    }
+
+    public void StartGame() {
+        spawnRecipeTimerMax = 1f;
+        spawnRecipeTimer = 0f;
     }
 }
