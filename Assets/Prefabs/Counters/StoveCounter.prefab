@@ -506,7 +506,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   counterTopPoint: {fileID: 3587986838574644560}
-  fryingRecepieSOArray:
+  fryingRecipesSOArray:
   - {fileID: 11400000, guid: 2a5de6dd06f17064e8d0eb7f78ad2eff, type: 2}
   - {fileID: 11400000, guid: 1c6421f1c29483744be0d908e4eed2dc, type: 2}
 --- !u!4 &3587986838574644560 stripped

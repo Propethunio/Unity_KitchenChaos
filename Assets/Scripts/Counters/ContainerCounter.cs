@@ -7,7 +7,7 @@ public class ContainerCounter : CounterMaster {
 
     public event EventHandler OnPlayerGrabbedObject;
 
-    [SerializeField] private KitchenObjectSO kitchenObjectSO;
+    public KitchenObjectSO kitchenObjectSO;
 
     public override void Interact(Player player) {
         if(!player.HasKitchenObject()) {

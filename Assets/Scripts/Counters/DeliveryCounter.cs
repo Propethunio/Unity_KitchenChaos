@@ -12,7 +12,7 @@ public class DeliveryCounter : CounterMaster {
                 if(player.GetKitchenObject().TryGetPlate(out PlateKitchenObject plateKitchenObject)) {
                     currPlateKitchenObject = plateKitchenObject;
                     player.GetKitchenObject().SetKitchenObjectParent(this);
-                    Invoke(nameof(TryDeliverRecipe), 3f);
+                    Invoke(nameof(TryDeliverRecipe), .2f);
                 }
             }
         }

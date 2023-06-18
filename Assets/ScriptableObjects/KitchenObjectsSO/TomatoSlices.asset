@@ -15,3 +15,4 @@ MonoBehaviour:
   prefab: {fileID: 2416765976109835488, guid: 7341a6971fdf60145b521a5cfef9bf4c, type: 3}
   sprite: {fileID: 21300000, guid: c9f08c3c1ae2a364aaeaa3712540b1d4, type: 3}
   objectName: Tomato Slices
+  outputOfRecipeType: 1
